@@ -119,10 +119,13 @@
               <div style="text-align: center;" >Thank you</div> 
             </div>
           </div>  
-        
+          <div>
+            <button class="savesilp" type="button" @click="Savesilp" >บันทึกใบเสร็จ</button>
+          </div>
         
         
       </div>
+      
 
       <!-- ------------------------------------------------ -->
     </div>
@@ -184,6 +187,7 @@
     </div>    
   </div>
 </div>
+
 </template>
 
 <script>
@@ -194,7 +198,8 @@ export default {
      maincontent: false,
      iceoptions: '',
      sweetoptions: '',
-     toppingoptions: '' 
+     toppingoptions: ''
+     
     };
     
   },
@@ -202,6 +207,9 @@ export default {
     openPopup(){
       this.isPopupVisible = !this.isPopupVisible;
       this.maincontent = !this.maincontent;
+    },
+    Savesilp(){
+      alert('บันทึกเรียบร้อยแล้ว')
     }
   }
 }
@@ -240,7 +248,7 @@ export default {
   border-radius: 6px;
   position: absolute;
   top: 50%;
-  left: 50%;
+  left: 45%;
   transform: translate(-50%, -50%) ;
   text-align: left;
   padding: 0 30px 30px;
@@ -258,7 +266,7 @@ export default {
   border-radius: 6px;
   position: absolute;
   top: 50%;
-  left: 75%;
+  left: 70%;
   transform: translate(-50%, -50%) ;
   text-align: center;
   padding: 0 30px 30px;
@@ -319,6 +327,21 @@ export default {
   cursor: pointer;
   box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
 }
+
+.savesilp { 
+  width: 40%;
+  margin: 10px;
+  padding: 10px 0;
+  background: orangered;
+  color: #fff;
+  border: 0;
+  outline: none;
+  font-size: 18px;
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+}
+
 
 .detail-order {
   justify-content: center;

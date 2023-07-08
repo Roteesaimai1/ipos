@@ -57,7 +57,7 @@
       <router-link style="text-decoration: none;" to="/page3">
         <div class="navlink-logout">
           <div style="margin-right: 10%; margin-left: 10%;">
-            <i class="fa-solid fa-right-from-bracket fa-xl" style="color: rgb(252, 65, 65)"></i>
+            <i class="fa-solid fa-right-from-bracket fa-xl" style="color: rgb(255, 2, 2)"></i>
           </div>
           
           <span class="rlink" style="margin-left: 3%;" ><strong>ออกจากระบบ</strong>  </span>
@@ -148,7 +148,7 @@ export default {
   
 }
 .navlink-logout:hover {
-  background-color: rgb(252, 65, 65);
+  background-color: rgb(255, 2, 2);
   font-size: 130%;
   
 }
