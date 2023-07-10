@@ -2,19 +2,46 @@
   <div class="Frame1" >
     <button class="BtnCreatemenu" style="left: 280px; top: 140px; position: absolute; ">เพิ่มเมนู</button>
     <div class="GridCreatemenu" >
+        <form @submit.prevent="saveMenu">
         <div>
-            <input v-model="namemenu" placeholder="ชื่อเมนู" />
-            <input v-model="pricemenu" placeholder="ราคา" />  
+            <label for="name">Name:</label>
+            <input type="text" id="name" placeholder="ชื่อเมนู" v-model="menu.name" required>
         </div>
-        <button>บันทึก</button>
+        <div>
+            <label for="description">ราคา:</label>
+            <input id="description" placeholder="ราคา" v-model="menu.price" required>
+        </div>
+        <button type="submit">บันทึกเมนู</button>
+        </form>
     </div>
     
 </div>
 </template>
 
 <script>
+import axios from 'axios';
 export default {
-
+    data(){
+        return{
+            menu:{
+                name: '',
+                price: '',
+            },
+        }
+    },
+    methods:{
+        saveMenu(){
+            axios.post('/api/menu', this.menu)
+                .then(() =>{
+                    console.log('Menu saved successfully!');
+                    location.reload();
+                } )
+                .catch((error) => {
+                    console.error('Error saving menu:', error);
+                
+                })
+        }
+    }
 }
 </script>
 
