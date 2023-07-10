@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import OrderView from '../views/OrderView.vue'
 import Page3 from '../views/Page3.vue'
 import MenuView from '../views/MenuView.vue'
 
@@ -14,10 +15,7 @@ const router = createRouter({
     {
       path: '/order',
       name: 'order',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/OrderView.vue')
+      component: OrderView
     },
     {
       path: '/page3',
