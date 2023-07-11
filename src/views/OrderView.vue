@@ -78,11 +78,15 @@
       <label>
         <input type="radio" v-model="toppingoptions" value="เนื้อมะพร้าวอ่อน"> เนื้อมะพร้าวอ่อน
       </label>
+      <label>
+        <input type="radio" v-model="toppingoptions" value=""> ไม่เลือก
+      </label>
     </div>   
   </div>
         
         <button type="button" @click="openPopup()" >สร้างรายการ</button>
         <button type="button" @click="openPopup()" >ยกเลิก</button>
+        
       </div>
 
       <!-- ------------------------------------------------ -->
@@ -101,21 +105,23 @@
             <div>
               <p><b>เมนู มะพร้าวปั่นนมสด</b></p> <!-- ชื่อรายการ -->              
             </div>  
-            <div style="text-align: right;" >40</div>    
+            <div style="text-align: right;" >{{ checkMenuPrice }}</div>    
             <div>
               
               <p>น้ำแข็ง: {{ iceoptions }}</p>
-              <div style="text-align: right;" >0</div> 
+              <div style="text-align: right;" >{{ checkIce }}</div> 
               <p>ระดับความหวาน: {{ sweetoptions }}</p>
               <div style="text-align: right;" >0</div> 
               <p>ท็อปปิ้ง: {{ toppingoptions }}</p>
-              <div style="text-align: right;" >10</div> 
+              <div style="text-align: right;" >{{ checkToppingPrice }}</div> 
                <!-- price-topping -->
             </div>
             <div class="footer-bill">
               <hr>
-              <div class="total"><h4>Total :</h4></div>
-              <div class="total-price" style="text-align: right;" ><b>50 บาท</b></div>
+              <div class="total">
+                <h4>Total :</h4>               
+              </div>
+              <div class="total-price" style="text-align: right; font-size: 23px; " ><b>{{ sumPrice }} บาท</b></div>
               <div style="text-align: center;" >Thank you</div> 
             </div>
           </div>  
@@ -198,9 +204,14 @@ export default {
      maincontent: false,
      iceoptions: '',
      sweetoptions: '',
-     toppingoptions: ''
+     toppingoptions: '',
+     checkMenuPrice: 40
+     
      
     };
+    
+  },
+  mounted(){
     
   },
   methods: {
@@ -210,6 +221,25 @@ export default {
     },
     Savesilp(){
       alert('บันทึกเรียบร้อยแล้ว')
+    }
+  },
+  computed: {
+    checkToppingPrice() {
+      if (this.toppingoptions !== '') {
+      return 10;
+    } else {
+      return 0;
+    }          
+    },
+    sumPrice(checkMenuPrice, checkToppingPrice, checkIce) {
+      return this.checkMenuPrice + this.checkToppingPrice + this.checkIce;
+    },
+    checkIce() {
+      if (this.iceoptions === 'ปั่น') {
+        return 5;
+      } else {
+        return 0;
+      }
     }
   }
 }
