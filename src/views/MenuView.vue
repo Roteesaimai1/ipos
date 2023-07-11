@@ -14,13 +14,11 @@
             <input type="text" v-model="menu.menuprice" placeholder="ราคาใหม่" >
             <button class="update-btn" @click="updateMenu(item._id)" >บันทึก</button>
             <button class="update-btn" @click="cancelEdit">ยกเลิกการแก้ไข</button> 
-            <button class="update-btn" @click="deleteMenu(item._id)">ลบ</button>
-          </div>
-          
-       </div> 
+            <button class="delete-btn" @click="confirmDelMenu(item._id)">ลบ</button>
+          </div>         
           </div>
         </div>
-       
+      </div>      
       </div>     
     </div>
        
@@ -45,11 +43,14 @@
         </div>      
         <div class="createbtn">
           <button class="btnsubmit"  type="submit">บันทึกเมนู</button>
-          <button class="btnsubmit" @click="showPopup()" type="submit">ปิด</button>  
+          <button class="btnsubmit" @click="showPopup()" >ปิด</button>  
         </div>        
         </form>
     </div>
     <!-- ---------------------------------------------Popup Create  Menu-------------------------------------------------- -->
+
+    
+  
 
     
 
@@ -124,6 +125,7 @@ methods: {
     },
     editMenu(menuId) {
       this.editingMenuId = menuId;
+      
     },
     cancelEdit() {
       this.menu.menuname = '';
@@ -131,6 +133,11 @@ methods: {
       this.editingMenuId = null;
     },
     /* Delete MENU */
+    confirmDelMenu(menuId){
+      if (confirm('ต้องการที่จะลบใช่ไหม?')) {
+        this.deleteMenu(menuId)
+      }
+    },
     deleteMenu(menuId) {
       const deleteMenu = {
         menuname: this.menu.menuname,        
@@ -156,16 +163,29 @@ computed: {
 </script>
 
 <style>
+.delete-btn{
+  background: red;
+  color: #fff;
+  border: 0;
+  outline: none;
+  font-size: 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);
+  margin-right: 2%;
+  margin-top: 5%;
+}
 .update-btn{
   background: orangered;
   color: #fff;
   border: 0;
   outline: none;
-  font-size: 18px;
+  font-size: 15px;
   border-radius: 4px;
   cursor: pointer;
   box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);
   margin-right: 2%;
+  margin-top: 5%;
 }
 .inputupdate input{
   border: 1px solid rgba(8, 8, 8, 0.45);
@@ -243,8 +263,8 @@ computed: {
     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
 }
 .GridCreatemenu{
-    width: 566px;
-    height: 550px;
+    width: 500px;
+    height: 530px;
     border-radius: 10px;
     background: #ffffff;
     flex-shrink: 0;
