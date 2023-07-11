@@ -6,15 +6,15 @@
         <div>
           <p style="justify-content: center; display: flex; margin-top: 3%;" ><b>{{ item.menuname }}</b></p>
           <p style="justify-content: center; display: flex;" >ราคา: {{ item.menuprice }}</p>
-          <div style="justify-content: center; display: flex;" class="menuedit">
-            <button class="btn-editmenu" @click="editMenu(item._id)" v-if="editingMenuId !== item._id" >แก้ไข</button>
+          <div style="justify-content: center; display: flex;" class="menuedit">            
+            <button class="btn-editmenu" @click="editMenu(item._id)" v-if="editingMenuId !== item._id" >แก้ไข</button>            
           <div v-else >
           <div class="inputupdate">
             <input type="text" v-model="menu.menuname" placeholder="ชื่อใหม่">
             <input type="text" v-model="menu.menuprice" placeholder="ราคาใหม่" >
             <button class="update-btn" @click="updateMenu(item._id)" >บันทึก</button>
             <button class="update-btn" @click="cancelEdit">ยกเลิกการแก้ไข</button> 
-            
+            <button class="update-btn" @click="deleteMenu(item._id)">ลบ</button>
           </div>
           
        </div> 
@@ -68,7 +68,8 @@ data() {
       },
       isCreatemenu: false,
       isMenulist: true,
-      editingMenuId: null,     
+      editingMenuId: null, 
+      deleteMenuId: null,    
       showmenu: []
     };
   },
@@ -128,8 +129,24 @@ methods: {
       this.menu.menuname = '';
       this.menu.menuprice = '';
       this.editingMenuId = null;
+    },
+    /* Delete MENU */
+    deleteMenu(menuId) {
+      const deleteMenu = {
+        menuname: this.menu.menuname,        
+        menuprice: this.menu.menuprice
+      }
+      axios.delete(`http://localhost:3000/menu/${menuId}`, deleteMenu)
+      .then((response)=>{
+        console.log('ลบเมนูแล้ว', response.data)
+        alert('ลบเมนูแล้ว', response.data)
+        window.location.reload();
+      })
+      .catch((error)=>{
+        console.error('เกิดข้อผิดพลาดในการลบข้อมูล', error);
+        window.location.reload();
+      })
     }
-    
   },
 computed: {
 
