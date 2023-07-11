@@ -2,12 +2,20 @@
   <div class="Frame1" >
     <button class="BtnCreatemenu" @click="showPopup()" style="left: 280px; top: 140px; position: absolute;  ">เพิ่มเมนู</button>
     <div class="grid-menu" v-if="isMenulist" :style="{ visibility: isMenulist ? 'visible' : 'hidden' }" >
-      <div class="menulist" v-for="item in showmenu" :key="item.id" >
-        <p style="justify-content: center; display: flex; margin-top: 3%;" ><b>{{ item.menuname }}</b></p>
-        <p style="justify-content: center; display: flex;" >ราคา: {{ item.menuprice }}</p>
-      <div style="justify-content: center; display: flex;" class="menuedit">
-        <button class="btn-editmenu" @click="editmenu(item.id)" >แก้ไข</button>
-      </div>
+      <div class="menulist" v-for="item in showmenu" :key="item._id" >
+        <div>
+          <p style="justify-content: center; display: flex; margin-top: 3%;" ><b>{{ item.menuname }}</b></p>
+          <p style="justify-content: center; display: flex;" >ราคา: {{ item.menuprice }}</p>
+          <div style="justify-content: center; display: flex;" class="menuedit">
+            <button class="btn-editmenu" @click="editMenu(item._id)" v-if="editingMenuId !== item._id" >แก้ไข</button>
+          <div v-else >
+          <input type="text" v-model="menu.menuname" >
+          <input type="text" v-model="menu.menuprice" >
+          <button @click="updateMenu(item._id)" >บันทึก</button>
+       </div> 
+          </div>
+        </div>
+       
       </div>     
     </div>
        
@@ -38,6 +46,8 @@
     </div>
     <!-- ---------------------------------------------Popup Create  Menu-------------------------------------------------- -->
 
+    
+
 
 </div>
 </template>
@@ -53,6 +63,7 @@ data() {
       },
       isCreatemenu: false,
       isMenulist: true,
+      editingMenuId: null,     
       showmenu: []
     };
   },
@@ -60,6 +71,7 @@ mounted(){
   this.showMenu()
 } , 
 methods: {
+    /* CREATE NEW MENU */
     saveMenu() {       
         axios.post('http://localhost:3000/menu', this.menu)
         .then((response) => {
@@ -77,6 +89,7 @@ methods: {
       this.isCreatemenu = !this.isCreatemenu
       this.isMenulist = !this.isMenulist
     },
+    /* GET MENU LIST */
     showMenu() {
       axios.get('http://localhost:3000/menu')
       .then((response) => {
@@ -85,8 +98,25 @@ methods: {
       .catch(err => {
         console.log('เกิดข้อผิดพลาด', err)
       })
-    }
-    
+    },
+    /* UPDATE DATA */
+    updateMenu(menuId) {
+      const updateMenuData = {
+        menuname: this.menu.menuname,        
+        menuprice: this.menu.menuprice       
+      }
+      axios.put(`http://localhost:3000/menu/${menuId}`, updateMenuData)
+      .then((response)=>{
+        console.log('อัปเดตข้อมูลเมนูแล้ว', response.data)
+        alert('อัปเดตข้อมูลเมนูแล้ว', response.data)
+      })
+      .catch((error)=>{
+        console.error('เกิดข้อผิดพลาดในการอัปเดตข้อมูล', error);
+      })
+    },
+    editMenu(menuId) {
+      this.editingMenuId = menuId;
+    } 
   },
 computed: {
 
