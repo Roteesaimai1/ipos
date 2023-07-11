@@ -1,15 +1,14 @@
 <template>
   <div class="Frame1" >
     <button class="BtnCreatemenu" @click="showPopup()" style="left: 280px; top: 140px; position: absolute;  ">เพิ่มเมนู</button>
-    <div class="grid-menu">
+    <div class="grid-menu" v-if="isMenulist" :style="{ visibility: isMenulist ? 'visible' : 'hidden' }" >
       <div class="menulist" v-for="item in showmenu" :key="item.id" >
         <p style="justify-content: center; display: flex; margin-top: 3%;" ><b>{{ item.menuname }}</b></p>
         <p style="justify-content: center; display: flex;" >ราคา: {{ item.menuprice }}</p>
       <div style="justify-content: center; display: flex;" class="menuedit">
-        <button class="btn-editmenu" >แก้ไข</button>
+        <button class="btn-editmenu" @click="editmenu(item.id)" >แก้ไข</button>
       </div>
-      </div>
-      
+      </div>     
     </div>
        
 
@@ -17,7 +16,7 @@
     <div v-if="isCreatemenu" class="GridCreatemenu" :style="{ visibility: isCreatemenu ? 'visible' : 'hidden' }" > 
         <form @submit.prevent="saveMenu">
         <div class="header-newmenu" style="justify-content: center; display: flex; margin-bottom: 5%;">
-            <h2 style="color: orangered;" >สร้างเมนูใหม่</h2>
+            <h2 style="color: orangered; " >สร้างเมนูใหม่</h2>
         </div>    
         <div class="Box">
             <label for="img" style="margin-bottom: 5%;" ><b>อัพโหลดภาพเมนู:</b></label>
@@ -33,7 +32,7 @@
         </div>      
         <div class="createbtn">
           <button class="btnsubmit"  type="submit">บันทึกเมนู</button>
-          <button class="btnsubmit" @click="showPopup()" type="submit">ยกเลิก</button>  
+          <button class="btnsubmit" @click="showPopup()" type="submit">ปิด</button>  
         </div>        
         </form>
     </div>
@@ -53,6 +52,7 @@ data() {
         menuprice: ''
       },
       isCreatemenu: false,
+      isMenulist: true,
       showmenu: []
     };
   },
@@ -71,12 +71,11 @@ methods: {
           console.error('เกิดข้อผิดพลาดในการบันทึกเมนู', error);
           alert('เกิดข้อผิดพลาดในการบันทึกเมนู')
           
-        });
-        
-      
+        });             
     },
     showPopup() {
       this.isCreatemenu = !this.isCreatemenu
+      this.isMenulist = !this.isMenulist
     },
     showMenu() {
       axios.get('http://localhost:3000/menu')
@@ -87,6 +86,7 @@ methods: {
         console.log('เกิดข้อผิดพลาด', err)
       })
     }
+    
   },
 computed: {
 
