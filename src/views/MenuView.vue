@@ -1,7 +1,20 @@
 <template>
   <div class="Frame1" >
-    <button class="BtnCreatemenu" style="left: 280px; top: 140px; position: absolute; ">เพิ่มเมนู</button>
-    <div class="GridCreatemenu" style="border-left: 5px solid orangered; " >
+    <button class="BtnCreatemenu" @click="showPopup()" style="left: 280px; top: 140px; position: absolute;  ">เพิ่มเมนู</button>
+    <div class="grid-menu">
+      <div class="menulist" v-for="item in showmenu" :key="item.id" >
+        <p style="justify-content: center; display: flex; margin-top: 3%;" ><b>{{ item.menuname }}</b></p>
+        <p style="justify-content: center; display: flex;" >ราคา: {{ item.menuprice }}</p>
+      <div style="justify-content: center; display: flex;" class="menuedit">
+        <button class="btn-editmenu" >แก้ไข</button>
+      </div>
+      </div>
+      
+    </div>
+       
+
+    <!-- ---------------------------------------------Popup Create  Menu-------------------------------------------------- -->
+    <div v-if="isCreatemenu" class="GridCreatemenu" :style="{ visibility: isCreatemenu ? 'visible' : 'hidden' }" > 
         <form @submit.prevent="saveMenu">
         <div class="header-newmenu" style="justify-content: center; display: flex; margin-bottom: 5%;">
             <h2 style="color: orangered;" >สร้างเมนูใหม่</h2>
@@ -16,17 +29,17 @@
             <div class="inputBox">
                 <input type="number" style="margin-bottom: 10%;" placeholder="ราคา" v-model="menu.menuprice" required>
                 <span>ราคา</span>
-            </div>         
-            
-            
+            </div>                    
         </div>      
         <div class="createbtn">
-          <button class="btnsubmit" type="submit">บันทึกเมนู</button>  
-        </div>
-        
+          <button class="btnsubmit"  type="submit">บันทึกเมนู</button>
+          <button class="btnsubmit" @click="showPopup()" type="submit">ยกเลิก</button>  
+        </div>        
         </form>
     </div>
-    
+    <!-- ---------------------------------------------Popup Create  Menu-------------------------------------------------- -->
+
+
 </div>
 </template>
 
@@ -38,12 +51,17 @@ data() {
       menu: {
         menuname: '',
         menuprice: ''
-      }
+      },
+      isCreatemenu: false,
+      showmenu: []
     };
   },
+mounted(){
+  this.showMenu()
+} , 
 methods: {
-    saveMenu() {
-      axios.post('http://localhost:3000/menu', this.menu)
+    saveMenu() {       
+        axios.post('http://localhost:3000/menu', this.menu)
         .then((response) => {
           console.log('เมนูถูกบันทึกแล้ว', response.data);
           alert('บันทึกเมนูเรียบร้อยแล้ว')
@@ -54,7 +72,24 @@ methods: {
           alert('เกิดข้อผิดพลาดในการบันทึกเมนู')
           
         });
+        
+      
+    },
+    showPopup() {
+      this.isCreatemenu = !this.isCreatemenu
+    },
+    showMenu() {
+      axios.get('http://localhost:3000/menu')
+      .then((response) => {
+        this.showmenu = response.data;
+      })
+      .catch(err => {
+        console.log('เกิดข้อผิดพลาด', err)
+      })
     }
+  },
+computed: {
+
   }
 };
 
@@ -62,10 +97,39 @@ methods: {
 
 <style>
 
+.btn-editmenu {
+  width: 102px;
+  height: 40px;
+  flex-shrink: 0;
+  background: orangered;
+  color: #fff;
+  border: 0;
+  outline: none;
+  font-size: 18px;
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);
+  margin: 5%;
+}
+.grid-menu {
+  margin-top: 5%;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 10px;
+}
+.menulist {
+  background-color: #fff;
+  margin: 2%;
+  border-radius: 5px;
+  width: 250px;
+  height: 150px;
+  position: static;
+}
 .createbtn {
     justify-content: center;
     display: flex;
     margin-top: 5%;
+    
 }
 .btnsubmit {
     width: 102px;
@@ -79,6 +143,7 @@ methods: {
     border-radius: 4px;
     cursor: pointer;
     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+    margin: 5%;
     
 }
 .BtnCreatemenu { 
@@ -103,6 +168,8 @@ methods: {
     margin-left: 30%;
     margin-top: 5%;
     padding: 5%;
+    border-left: 5px solid orangered;
+    visibility: hidden;
 }
 
 

@@ -115,6 +115,7 @@ export default {
 .nav {
   display: block; 
   position: sticky;
+  top: 0;
 }
 
 /* Navbar menu */
