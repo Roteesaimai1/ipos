@@ -9,9 +9,14 @@
           <div style="justify-content: center; display: flex;" class="menuedit">
             <button class="btn-editmenu" @click="editMenu(item._id)" v-if="editingMenuId !== item._id" >แก้ไข</button>
           <div v-else >
-          <input type="text" v-model="menu.menuname" >
-          <input type="text" v-model="menu.menuprice" >
-          <button @click="updateMenu(item._id)" >บันทึก</button>
+          <div class="inputupdate">
+            <input type="text" v-model="menu.menuname" placeholder="ชื่อใหม่">
+            <input type="text" v-model="menu.menuprice" placeholder="ราคาใหม่" >
+            <button class="update-btn" @click="updateMenu(item._id)" >บันทึก</button>
+            <button class="update-btn" @click="cancelEdit">ยกเลิกการแก้ไข</button> 
+            
+          </div>
+          
        </div> 
           </div>
         </div>
@@ -77,12 +82,12 @@ methods: {
         .then((response) => {
           console.log('เมนูถูกบันทึกแล้ว', response.data);
           alert('บันทึกเมนูเรียบร้อยแล้ว')
-          
+          window.location.reload();
         })
         .catch((error) => {
           console.error('เกิดข้อผิดพลาดในการบันทึกเมนู', error);
           alert('เกิดข้อผิดพลาดในการบันทึกเมนู')
-          
+          window.location.reload();
         });             
     },
     showPopup() {
@@ -109,14 +114,22 @@ methods: {
       .then((response)=>{
         console.log('อัปเดตข้อมูลเมนูแล้ว', response.data)
         alert('อัปเดตข้อมูลเมนูแล้ว', response.data)
+        window.location.reload();
       })
       .catch((error)=>{
         console.error('เกิดข้อผิดพลาดในการอัปเดตข้อมูล', error);
+        window.location.reload();
       })
     },
     editMenu(menuId) {
       this.editingMenuId = menuId;
-    } 
+    },
+    cancelEdit() {
+      this.menu.menuname = '';
+      this.menu.menuprice = '';
+      this.editingMenuId = null;
+    }
+    
   },
 computed: {
 
@@ -126,7 +139,30 @@ computed: {
 </script>
 
 <style>
-
+.update-btn{
+  background: orangered;
+  color: #fff;
+  border: 0;
+  outline: none;
+  font-size: 18px;
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);
+  margin-right: 2%;
+}
+.inputupdate input{
+  border: 1px solid rgba(8, 8, 8, 0.45);
+  background: #fff;
+  border-radius: 5px;
+  outline: none;
+  color: #000000;
+  font-size: 1em;
+  justify-content: center;
+  display: flex; 
+}
+.inputupdate input:focus {
+  border: 2px solid orangered;
+}
 .btn-editmenu {
   width: 102px;
   height: 40px;
@@ -145,7 +181,7 @@ computed: {
   margin-top: 5%;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  grid-gap: 10px;
+  grid-gap: 30px;
 }
 .menulist {
   background-color: #fff;
