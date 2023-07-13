@@ -26,6 +26,9 @@
     <!-- ---------------------------------------------Popup Create  Menu-------------------------------------------------- -->
     <div v-if="isCreatemenu" class="GridCreatemenu" :style="{ visibility: isCreatemenu ? 'visible' : 'hidden' }" > 
         <form @submit.prevent="saveMenu">
+        <div class="img-createmenu" style="text-align: center;">
+          <img src="../assets/menuadd.png" width="120" height="120" />
+        </div>
         <div class="header-newmenu" style="justify-content: center; display: flex; margin-bottom: 5%;">
             <h2 style="color: orangered; " >สร้างเมนูใหม่</h2>
         </div>    
@@ -163,6 +166,12 @@ computed: {
 </script>
 
 <style>
+.img-createmenu {
+  justify-content: center;
+  margin-top: -140px;
+  border-radius: 50%;
+  
+}
 .delete-btn{
   background: red;
   color: #fff;

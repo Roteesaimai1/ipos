@@ -3,16 +3,16 @@
     <div class="orderpage">
       <div v-for="item in menulist" :key="item._id" class="grid-order">
         <div class="img-order">
-          <img src="../assets/menu-meeoreo.png" alt="" style="width: 100px; height: 80; ">
+          <img src="../assets/menu-meeoreo.png" alt="" style="width: 80px; height: 50; ">
         </div>
         <div class="name-order">
           <h4>{{ item.menuname }}</h4>
         </div>
         <div class="detail-order">
-          <p>{{ item.menuprice }} บาท</p>
+          <p>ราคา <b> {{ item.menuprice }}</b> บาท</p>
         </div>
         <div class="btnorder">
-          <button class="btn-order" @click="openPopup()">ขายเลย</button>
+          <button class="btn-order" @click="openPopup()">สร้างออเดอร์</button>
         </div>
       </div>
 
@@ -21,12 +21,12 @@
         <div class="img-bill" style="text-align: center">
           <img src="../assets/billpic.png" width="120" height="120" />
         </div>
-        <h2>มะพร้าวปั่นนมสด 40</h2>       
+        <h3>มะพร้าวปั่นนมสด 40</h3>       
         <p>บิลที่ 1 | ผู้สร้างรายการ Joe</p>
         <hr>
         <div>
           <div class="options">
-            <h3>น้ำแข็ง</h3>
+            <h5>น้ำแข็ง</h5>
             <label>
               <input type="radio" v-model="iceoptions" value="ปั่น" /> ปั่น
             </label>
@@ -34,8 +34,9 @@
               <input type="radio" v-model="iceoptions" value="ไม่ปั่น"/> ไม่ปั่น
             </label>
           </div>
+          <hr>
           <div class="options">
-            <h3>ระดับความหวาน</h3>
+            <h5>ระดับความหวาน</h5>
             <label>
               <input type="radio" v-model="sweetoptions" value="ปกติ" /> ปกติ
             </label>
@@ -46,8 +47,9 @@
               <input type="radio" v-model="sweetoptions" value="เพิ่มหวาน" /> เพิ่มหวาน
             </label>
           </div>
+          <hr>
           <div class="options">
-            <h3>ท็อปปิ้ง (เพิ่ม 10 บาท)</h3>
+            <h5>ท็อปปิ้ง (เพิ่ม 10 บาท)</h5>
             <label>
               <input type="radio" v-model="toppingoptions" value="คาราเมล" /> คาราเมล
             </label>
@@ -64,9 +66,12 @@
               <input type="radio" v-model="toppingoptions" value="" /> ไม่เลือก
             </label>
           </div>
+          <hr>
         </div>
-        <button type="button" @click="openPopup()">สร้างรายการ</button>
-        <button type="button" @click="openPopup()">ยกเลิก</button>
+        <button type="button" @click="openPopup()">เปิดรายการ</button>
+        <button type="button" style="background-color: red;" @click="openPopup()">ยกเลิกรายการ</button>       
+        <button type="button" style="background-color: yellowgreen;" @click="Savesilp">บันทึกรูปใบเสร็จ</button>
+        
       </div>
 
       <!-- ------------------------------------------------ -->
@@ -106,11 +111,7 @@
             <div style="text-align: center">Thank you</div>
           </div>
         </div>
-        <div>
-          <button class="savesilp" type="button" @click="Savesilp">
-            บันทึกใบเสร็จ
-          </button>
-        </div>
+        
       </div>
       <!-- ------------------------------------------------ -->
     </div>
@@ -210,6 +211,7 @@ export default {
   color: #000000;
   visibility: hidden;
   z-index: 1;
+  
 }
 
 .popup-bill {
@@ -227,6 +229,7 @@ export default {
   visibility: hidden;
   z-index: 1;
   padding: 30px 10px 20px 10px;
+  
 }
 .popup-bill span {
   padding: 10px;
@@ -246,7 +249,7 @@ export default {
 .popup button {
   width: 40%;
   margin: 10px;
-  margin-top: 50%;
+  margin-top: 10%;
   padding: 10px 0;
   background: orangered;
   color: #fff;
@@ -255,7 +258,7 @@ export default {
   font-size: 18px;
   border-radius: 4px;
   cursor: pointer;
-  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 7px 5px rgba(0, 0, 0, 0.2);
 }
 
 .btnorder {
@@ -266,7 +269,6 @@ export default {
 .btn-order {
   width: 40%;
   margin: 10px;
-
   padding: 10px 0;
   background: orangered;
   color: #fff;
@@ -278,7 +280,7 @@ export default {
   box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
 }
 
-.savesilp {
+/* .savesilp {
   width: 40%;
   margin: 10px;
   padding: 10px 0;
@@ -290,7 +292,7 @@ export default {
   border-radius: 4px;
   cursor: pointer;
   box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
-}
+} */
 
 .detail-order {
   justify-content: center;
