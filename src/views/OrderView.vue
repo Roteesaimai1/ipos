@@ -3,14 +3,14 @@
     <div class="orderpage">
       <div v-for="item in menulist" :key="item._id" class="grid-order">
         <div class="img-order">
-          <img src="../assets/menu-meeoreo.png" alt="" style="width: 80px; height: 50; ">
-        </div>
+          <img src="../assets/teapic.png" alt="" style="width: 80px; height: 50; ">
+        </div>      
         <div class="name-order">
           <h4>{{ item.menuname }}</h4>
         </div>
         <div class="detail-order">
           <p>ราคา <b> {{ item.menuprice }}</b> บาท</p>
-        </div>
+        </div>       
         <div class="btnorder">
           <button class="btn-order" @click="openPopup()">สร้างออเดอร์</button>
         </div>
@@ -268,7 +268,7 @@ export default {
 
 .btn-order {
   width: 40%;
-  margin: 10px;
+  margin: 2px;
   padding: 10px 0;
   background: orangered;
   color: #fff;
@@ -279,20 +279,6 @@ export default {
   cursor: pointer;
   box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
 }
-
-/* .savesilp {
-  width: 40%;
-  margin: 10px;
-  padding: 10px 0;
-  background: orangered;
-  color: #fff;
-  border: 0;
-  outline: none;
-  font-size: 18px;
-  border-radius: 4px;
-  cursor: pointer;
-  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
-} */
 
 .detail-order {
   justify-content: center;
@@ -307,6 +293,7 @@ export default {
 .img-order {
   justify-content: center;
   display: flex;
+  margin-bottom: 2%;
 }
 
 .orderpage {

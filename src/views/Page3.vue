@@ -20,10 +20,10 @@ export default {
     };
   },
   mounted(){
-    this.fetchData();
+    /* this.fetchData(); */
   }, 
   methods: {
-    fetchData(){
+    /* fetchData(){
       axios.get('http://localhost:8080/api/addtask')
       .then(response =>{
         this.addtask = response.data;
@@ -34,7 +34,7 @@ export default {
     },
     fnc1(){
       alert(`${this.addtask} api`);
-    }
+    } */
   }
 
 }

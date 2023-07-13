@@ -3,8 +3,8 @@
     <div class="row">
       <!-- Card 1 -->
       <div class="card1">
-        <div class="card1-head" >
-          <h4 style="text-align: center; margin: 2%;" ><strong>ยอดขาย</strong></h4>
+        <div class="card1-head" >         
+          <h4 style="text-align: center; margin: 2%;" ><strong>💵ยอดขาย</strong></h4>          
         </div>
         <hr>
         <div class="card1-content">
@@ -15,7 +15,7 @@
       <!-- card 2  -->
       <div class="card2">
         <div class="card2-head">
-          <h4 style="text-align: center; margin: 2%;" ><strong>ต้นทุน</strong></h4>
+          <h4 style="text-align: center; margin: 2%;" ><strong>🛒ต้นทุน</strong></h4>
           <hr>
         </div>
         <div class="card2-content">
@@ -26,7 +26,7 @@
       <!-- Card 3 -->
       <div class="card3">
         <div class="card3-head">
-          <h4 style="text-align: center; margin: 2%;" ><strong>กำไร</strong></h4>
+          <h4 style="text-align: center; margin: 2%;" ><strong>🪙กำไร</strong></h4>
           <hr>
         </div>
         <div class="card3-content">
@@ -37,7 +37,7 @@
       <!-- Card 4 -->
       <div class="card4">
         <div class="card4-head">
-          <h4 style="text-align: center; margin: 2%;" ><strong>ยอดขายทั้งเดือน</strong></h4>
+          <h4 style="text-align: center; margin: 2%;" ><strong>🎯ยอดขายทั้งเดือน</strong></h4>
           <hr>
         </div>
         <div class="card4-content">
@@ -90,8 +90,8 @@
       <div class="logupdate">
         <div class="headlog" style="text-align: left; padding-top: 1%;" ><strong>Update:</strong></div>       
           <div class="marquee">
-            <span class="marquee-text" v-for="item in logupdate" :key="item.id" >
-              {{ item.text }}
+            <span class="marquee-text" v-for="item in textlog" :key="item.id" >
+              {{ textlog.text }}
             </span>
           </div>
       </div>
@@ -109,22 +109,20 @@ export default {
       selling: 1800,
       margin: 800,
       profit: 1000,
-      totalmargin: 15500
+      totalmargin: 15500,
+      textlog: {
+        id: 1,
+        text: '15.32 Joe: ขายมะพร้าวปั่นนมสด 1 ราย  ',
+        id: 2,
+        text: '15.52 Joe: ขายหมหมี 1 ราย  '
+      }
     };
   },
   mounted(){
-    this.fetchData();
+    
   }, 
   methods: {
-    fetchData(){
-      axios.get('http://localhost:8080/api/addtask')
-      .then(response =>{
-        this.logupdate = response.data.logupdate;
-      })
-      .catch(err =>{
-        console.log('เกิดข้อผิดพลาดในการดึง API', err);
-      });
-    }
+    
   }
 
 }
@@ -141,7 +139,7 @@ export default {
 
 .marquee-text {
   display: inline-block;
-  animation: marquee 10s linear infinite;
+  animation: marquee 20s linear infinite;
 }
 
 @keyframes marquee {
