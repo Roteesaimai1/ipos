@@ -187,6 +187,11 @@ computed: {
   margin-right: 2%;
   margin-top: 5%;
 }
+.inputupdate {
+  background: #fff;
+  border-radius: 5px;
+  padding: 5px;
+}
 .inputupdate input{
   border: 1px solid rgba(8, 8, 8, 0.45);
   background: #fff;

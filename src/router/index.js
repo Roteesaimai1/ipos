@@ -23,8 +23,8 @@ const router = createRouter({
       component: Page3
     },
     {
-      path: '/MenuView',
-      name: 'MenuView',
+      path: '/menuedit',
+      name: 'menuedit',
       component: MenuView
     }
   ]

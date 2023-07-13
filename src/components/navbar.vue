@@ -36,7 +36,7 @@
           <span class="rlink" style="margin-left: 4%;" ><strong>จัดการบิล</strong>  </span>
         </div>
       </router-link>
-      <router-link style="text-decoration: none;" to="/MenuView">
+      <router-link style="text-decoration: none;" to="/menuedit">
         <div class="navlink">
           <div style="margin-right: 10%; margin-left: 10%;">
             <i class="fa-solid fa-file-pen fa-xl" style="color: orangered;"></i>
