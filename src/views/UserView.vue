@@ -40,7 +40,7 @@
     <!-- Popup Create New Users -->
     <div class="popup-create" v-if="visNewuser" :style="{ visibility: visNewuser ? 'visible' : 'hidden' }" style="align-items: center; display: flex; justify-content: center;">
         <div class="create-user" style="align-items: center; display: grid; justify-content: center;">
-            <h3 style="align-items: center; display: grid; justify-content: center; margin-top: 10px; ">New Users</h3>
+            <h3 style="align-items: center; display: grid; justify-content: center; margin-top: 10px; color: orangered; ">New Users</h3>
             <div class="inputBox">
                 <input type="text" placeholder="Username" style="margin-bottom: 10%;"  required>
                 <span>Username</span>
