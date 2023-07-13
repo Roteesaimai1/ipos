@@ -1,6 +1,9 @@
 <template>
   <div class="grid-container">
-    <div class="header" style="text-align: right;" > <strong>หน้า : {{ currentPage }}</strong> </div>
+    <div class="header" style="text-align: right;" >       
+      <span style="text-align: right;" ><strong>หน้า : {{ currentPage }}</strong> </span>  
+               
+    </div>
     <div class="sidebar"> <navbar/> </div>
     <div class="content"> <router-view></router-view> </div> 
     <div class="footer">BACKOFFICE: ลิงปีนมะพร้าว | Developer JDev </div>

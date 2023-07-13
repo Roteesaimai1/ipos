@@ -12,16 +12,18 @@
           <p>ราคา <b> {{ item.menuprice }}</b> บาท</p>
         </div>       
         <div class="btnorder">
-          <button class="btn-order" @click="openPopup()">สร้างออเดอร์</button>
-        </div>
-      </div>
+          <button class="btn-order" @click="openPopup(item._id)" v-if="createMenuId !== item._id">สร้างออเดอร์</button>       
+        
+        
+      
 
       <!-- POPUP MENU -->
-      <div v-if="isPopupVisible" class="popup" :style="{ visibility: isPopupVisible ? 'visible' : 'hidden' }">
+      <div v-else >
+      <div  v-if="isPopupVisible && createMenuId === item._id" class="popup" :style="{ visibility: isPopupVisible ? 'visible' : 'hidden' }">
         <div class="img-bill" style="text-align: center">
           <img src="../assets/billpic.png" width="120" height="120" />
         </div>
-        <h3>มะพร้าวปั่นนมสด 40</h3>       
+        <h3>{{ item.menuname }} {{ item.menuprice }}</h3>       
         <p>บิลที่ 1 | ผู้สร้างรายการ Joe</p>
         <hr>
         <div>
@@ -63,17 +65,17 @@
               <input type="radio" v-model="toppingoptions" value="เนื้อมะพร้าวอ่อน"/> เนื้อมะพร้าวอ่อน
             </label>
             <label>
-              <input type="radio" v-model="toppingoptions" value="" /> ไม่เลือก
+              <input type="radio" v-model="toppingoptions" value="" /> ไม่เลือกท็อปปิ้ง
             </label>
           </div>
           <hr>
         </div>
         <button type="button" @click="openPopup()">เปิดรายการ</button>
-        <button type="button" style="background-color: red;" @click="openPopup()">ยกเลิกรายการ</button>       
         <button type="button" style="background-color: yellowgreen;" @click="Savesilp">บันทึกรูปใบเสร็จ</button>
-        
+        <button type="button" style="background-color: red;" @click="openPopup()">ยกเลิกรายการ</button>                      
       </div>
-
+ 
+    
       <!-- ------------------------------------------------ -->
 
       <!-- POPUP-BILL MENU -->
@@ -87,17 +89,17 @@
           </div>
           <hr />
           <div>
-            <p><b>เมนู มะพร้าวปั่นนมสด</b></p>
+            <p><b>เมนู {{ item.menuname }}</b></p>
             <!-- ชื่อรายการ -->
           </div>
-          <div style="text-align: right">{{ checkMenuPrice }}</div>
+          <div style="text-align: right">{{ item.menuprice }}</div>
           <div>
             <p>น้ำแข็ง: {{ iceoptions }}</p>
-            <div style="text-align: right">{{ checkIce }}</div>
+            <div style="text-align: right">{{ checkIce }}</div> <!-- ราคา -->
             <p>ระดับความหวาน: {{ sweetoptions }}</p>
-            <div style="text-align: right">0</div>
+            <div style="text-align: right">0</div> <!-- ราคา -->
             <p>ท็อปปิ้ง: {{ toppingoptions }}</p>
-            <div style="text-align: right">{{ checkToppingPrice }}</div>
+            <div style="text-align: right">{{ checkToppingPrice }}</div> <!-- ราคา -->
             <!-- price-topping -->
           </div>
           <div class="footer-bill">
@@ -106,7 +108,7 @@
               <h4>Total :</h4>
             </div>
             <div class="total-price" style="text-align: right; font-size: 23px">
-              <b>{{ sumPrice }} บาท</b>
+              <b>{{ item.menuprice + checkIce + checkToppingPrice}} บาท</b>
             </div>
             <div style="text-align: center">Thank you</div>
           </div>
@@ -116,6 +118,9 @@
       <!-- ------------------------------------------------ -->
     </div>
   </div>
+</div>
+  </div>
+</div>
 </template>
 
 <script>
@@ -127,18 +132,19 @@ export default {
       maincontent: false,
       iceoptions: "",
       sweetoptions: "",
-      toppingoptions: "",
-      checkMenuPrice: 40,
+      toppingoptions: "",      
       menulist: [],
+      createMenuId: null
     };
   },
   mounted() {
     this.showMenu();
   },
   methods: {
-    openPopup() {
+    openPopup(menuId) {
       this.isPopupVisible = !this.isPopupVisible;
       this.maincontent = !this.maincontent;
+      this.createMenuId = menuId
     },
     Savesilp() {
       alert("บันทึกเรียบร้อยแล้ว");
