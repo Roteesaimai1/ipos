@@ -45,7 +45,7 @@
           <span class="rlink" style="margin-left: 1%;" > <strong>แก้ไขเมนู</strong> </span>
         </div>
       </router-link>
-      <router-link style="text-decoration: none;" to="/page3">
+      <router-link style="text-decoration: none;" to="/useredit">
         <div class="navlink">
           <div style="margin-right: 10%; margin-left: 10%;">
             <i class="fa-solid fa-user-pen fa-xl" style="color: orangered;"></i>

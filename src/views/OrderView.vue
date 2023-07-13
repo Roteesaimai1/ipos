@@ -13,113 +13,112 @@
         </div>       
         <div class="btnorder">
           <button class="btn-order" @click="openPopup(item._id)" v-if="createMenuId !== item._id">สร้างออเดอร์</button>       
-        
-        
-      
 
       <!-- POPUP MENU -->
-      <div v-else >
-      <div  v-if="isPopupVisible && createMenuId === item._id" class="popup" :style="{ visibility: isPopupVisible ? 'visible' : 'hidden' }">
-        <div class="img-bill" style="text-align: center">
-          <img src="../assets/billpic.png" width="120" height="120" />
-        </div>
-        <h3>{{ item.menuname }} {{ item.menuprice }}</h3>       
-        <p>บิลที่ 1 | ผู้สร้างรายการ Joe</p>
-        <hr>
-        <div>
-          <div class="options">
-            <h5>น้ำแข็ง</h5>
-            <label>
-              <input type="radio" v-model="iceoptions" value="ปั่น" /> ปั่น
-            </label>
-            <label>
-              <input type="radio" v-model="iceoptions" value="ไม่ปั่น"/> ไม่ปั่น
-            </label>
+        <div v-else >
+        <div  v-if="isPopupVisible && createMenuId === item._id" class="popup" :style="{ visibility: isPopupVisible ? 'visible' : 'hidden' }">
+          <div class="img-bill" style="text-align: center">
+            <img src="../assets/billpic.png" width="120" height="120" />
           </div>
+          <h3>{{ item.menuname }} {{ item.menuprice }}</h3>       
+          <p>บิลที่ 1 | ผู้สร้างรายการ Joe</p>
           <hr>
-          <div class="options">
-            <h5>ระดับความหวาน</h5>
-            <label>
-              <input type="radio" v-model="sweetoptions" value="ปกติ" /> ปกติ
-            </label>
-            <label>
-              <input type="radio" v-model="sweetoptions" value="หวานน้อย" /> หวานน้อย
-            </label>
-            <label>
-              <input type="radio" v-model="sweetoptions" value="เพิ่มหวาน" /> เพิ่มหวาน
-            </label>
+          <div>
+            <div class="options">
+              <h5>น้ำแข็ง</h5>
+              <label>
+                <input type="radio" v-model="iceoptions" value="ปั่น" /> ปั่น
+              </label>
+              <label>
+                <input type="radio" v-model="iceoptions" value="ไม่ปั่น"/> ไม่ปั่น
+              </label>
+              <label>
+                <input type="radio" v-model="iceoptions" value=""/> ไม่เลือก
+              </label>
+            </div>
+            <hr>
+            <div class="options">
+              <h5>ระดับความหวาน</h5>
+              <label>
+                <input type="radio" v-model="sweetoptions" value="ปกติ" /> ปกติ
+              </label>
+              <label>
+                <input type="radio" v-model="sweetoptions" value="หวานน้อย" /> หวานน้อย
+              </label>
+              <label>
+                <input type="radio" v-model="sweetoptions" value="เพิ่มหวาน" /> เพิ่มหวาน
+              </label>
+              <label>
+                <input type="radio" v-model="sweetoptions" value="" /> ไม่เลือก
+              </label>
+            </div>
+            <hr>
+            <div class="options">
+              <h5>ท็อปปิ้ง (เพิ่ม 10 บาท)</h5>
+              <label>
+                <input type="radio" v-model="toppingoptions" value="คาราเมล" /> คาราเมล
+              </label>
+              <label>
+                <input type="radio" v-model="toppingoptions" value="ช็อกโกแล็ต" /> ช็อกโกแล็ต
+              </label>
+              <label>
+                <input type="radio" v-model="toppingoptions" value="สตรอเบอร์รี่"/> สตรอเบอร์รี่
+              </label>
+              <label>
+                <input type="radio" v-model="toppingoptions" value="เนื้อมะพร้าวอ่อน"/> เนื้อมะพร้าวอ่อน
+              </label>
+              <label>
+                <input type="radio" v-model="toppingoptions" value="" /> ไม่เลือก
+              </label>
+            </div>
+            <hr>
           </div>
-          <hr>
-          <div class="options">
-            <h5>ท็อปปิ้ง (เพิ่ม 10 บาท)</h5>
-            <label>
-              <input type="radio" v-model="toppingoptions" value="คาราเมล" /> คาราเมล
-            </label>
-            <label>
-              <input type="radio" v-model="toppingoptions" value="ช็อกโกแล็ต" /> ช็อกโกแล็ต
-            </label>
-            <label>
-              <input type="radio" v-model="toppingoptions" value="สตรอเบอร์รี่"/> สตรอเบอร์รี่
-            </label>
-            <label>
-              <input type="radio" v-model="toppingoptions" value="เนื้อมะพร้าวอ่อน"/> เนื้อมะพร้าวอ่อน
-            </label>
-            <label>
-              <input type="radio" v-model="toppingoptions" value="" /> ไม่เลือกท็อปปิ้ง
-            </label>
-          </div>
-          <hr>
-        </div>
-        <button type="button" @click="openPopup()">เปิดรายการ</button>
-        <button type="button" style="background-color: yellowgreen;" @click="Savesilp">บันทึกรูปใบเสร็จ</button>
-        <button type="button" style="background-color: red;" @click="openPopup()">ยกเลิกรายการ</button>                      
-      </div>
- 
-    
+          <button type="button" @click="openPopup()">เปิดรายการ</button>
+          <button type="button" style="background-color: yellowgreen;" @click="Savesilp">บันทึกรูปใบเสร็จ</button>
+          <button type="button" style="background-color: red;" @click="openPopup()">ยกเลิกรายการ</button>                      
+        </div>   
       <!-- ------------------------------------------------ -->
-
+      
       <!-- POPUP-BILL MENU -->
-
-      <div v-if="isPopupVisible" class="popup-bill" :style="{ visibility: isPopupVisible ? 'visible' : 'hidden' }">
-        <div class="ppbill">
-          <div class="head-bill" style="text-align: center">
-            <h2>ร้าน ลิงปีนมะพร้าว</h2>
-            <b>สาขา ตลาดใหญ่มาก มาร์เก็ต</b>
-            <p>บิลที่ 1 ผู้สร้างรายการ Joe</p>
-          </div>
-          <hr />
-          <div>
-            <p><b>เมนู {{ item.menuname }}</b></p>
-            <!-- ชื่อรายการ -->
-          </div>
-          <div style="text-align: right">{{ item.menuprice }}</div>
-          <div>
-            <p>น้ำแข็ง: {{ iceoptions }}</p>
-            <div style="text-align: right">{{ checkIce }}</div> <!-- ราคา -->
-            <p>ระดับความหวาน: {{ sweetoptions }}</p>
-            <div style="text-align: right">0</div> <!-- ราคา -->
-            <p>ท็อปปิ้ง: {{ toppingoptions }}</p>
-            <div style="text-align: right">{{ checkToppingPrice }}</div> <!-- ราคา -->
-            <!-- price-topping -->
-          </div>
-          <div class="footer-bill">
+        <div v-if="isPopupVisible" class="popup-bill" :style="{ visibility: isPopupVisible ? 'visible' : 'hidden' }">
+          <div class="ppbill">
+            <div class="head-bill" style="text-align: center">
+              <h2>ร้าน ลิงปีนมะพร้าว</h2>
+              <b>สาขา ตลาดใหญ่มาก มาร์เก็ต</b>
+              <p>บิลที่ 1 ผู้สร้างรายการ Joe</p>
+            </div>
             <hr />
-            <div class="total">
-              <h4>Total :</h4>
+            <div>
+              <p><b>เมนู {{ item.menuname }}</b></p>
+              <!-- ชื่อรายการ -->
             </div>
-            <div class="total-price" style="text-align: right; font-size: 23px">
-              <b>{{ item.menuprice + checkIce + checkToppingPrice}} บาท</b>
+            <div style="text-align: right">{{ item.menuprice }}</div>
+            <div>
+              <p>น้ำแข็ง: {{ iceoptions }}</p>
+              <div style="text-align: right">{{ checkIce }}</div> <!-- ราคา -->
+              <p>ระดับความหวาน: {{ sweetoptions }}</p>
+              <div style="text-align: right">0</div> <!-- ราคา -->
+              <p>ท็อปปิ้ง: {{ toppingoptions }}</p>
+              <div style="text-align: right">{{ checkToppingPrice }}</div> <!-- ราคา -->
+              <!-- price-topping -->
             </div>
-            <div style="text-align: center">Thank you</div>
-          </div>
+            <div class="footer-bill">
+              <hr />
+              <div class="total">
+                <h4>Total :</h4>
+              </div>
+              <div class="total-price" style="text-align: right; font-size: 23px">
+                <b>{{ item.menuprice + checkIce + checkToppingPrice}} บาท</b>
+              </div>
+              <div style="text-align: center">Thank you</div>
+            </div>
+          </div>         
         </div>
-        
-      </div>
       <!-- ------------------------------------------------ -->
+      </div>
     </div>
   </div>
 </div>
-  </div>
 </div>
 </template>
 
@@ -134,7 +133,7 @@ export default {
       sweetoptions: "",
       toppingoptions: "",      
       menulist: [],
-      createMenuId: null
+      createMenuId: null,     
     };
   },
   mounted() {
