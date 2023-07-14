@@ -6,7 +6,7 @@
     </div>
     <div class="sidebar"> <navbar/> </div>
     <div class="content"> <router-view></router-view> </div> 
-    <div class="footer">BACKOFFICE: ลิงปีนมะพร้าว | Developer JDev </div>
+    <div class="footer">iPOS : ลิงปีนมะพร้าว | Developer JDev </div>
     
   </div>
 

@@ -150,7 +150,7 @@ methods: {
       .then((response)=>{
         console.log('ลบเมนูแล้ว', response.data)
         alert('ลบเมนูแล้ว', response.data)
-        window.location.reload();
+        this.showMenu()
       })
       .catch((error)=>{
         console.error('เกิดข้อผิดพลาดในการลบข้อมูล', error);
