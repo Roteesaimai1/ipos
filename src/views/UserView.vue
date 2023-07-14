@@ -18,7 +18,7 @@
                     <td>
                         <button class="btn-edit">แก้ไข</button>
                         
-                        <button class="btn-del">ลบ</button>
+                        <button class="btn-del" @click="DelUser(users._id)" >ลบ</button>
                     </td>
                 </tr>            
             </table>          
@@ -127,6 +127,23 @@ export default {
             })
             .catch((err) => {
                 console.error('เกิดข้อผิดพลาดในการอัปเดต', err);
+            })
+        },
+        DelUser(userId) {
+            const deleteuser = {
+                username: this.user.username,
+                password: this.user.password,
+                displayname: this.user.displayname,
+                userrole: this.user.userrole,
+                status: this.user.status,
+            }
+            axios.delete(`http://localhost:3000/user/${userId}`, deleteuser)
+            .then((response) => {
+                console.log('ลบ User เรียบร้อยแล้ว', response.data);
+                this.Userlist();
+            })
+            .catch((err) => {
+                console.error('เกิดข้อผิดพลาดในการลบข้อมูล',err);
             })
         }
     },

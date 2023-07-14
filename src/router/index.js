@@ -4,6 +4,7 @@ import OrderView from '../views/OrderView.vue'
 import Page3 from '../views/Page3.vue'
 import MenuView from '../views/MenuView.vue'
 import UserView from '../views/UserView.vue'
+import DevView from '../views/DevView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -32,6 +33,11 @@ const router = createRouter({
       path: '/useredit',
       name: 'useredit',
       component: UserView
+    },
+    {
+      path: '/devpage',
+      name: 'devpage',
+      component: DevView
     }
   ]
 })

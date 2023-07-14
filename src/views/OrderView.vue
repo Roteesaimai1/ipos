@@ -12,7 +12,7 @@
           <p>ราคา <b> {{ item.menuprice }}</b> บาท</p>
         </div>       
         <div class="btnorder">
-          <button class="btn-order" @click="openPopup(item._id)" v-if="createMenuId !== item._id">สร้างออเดอร์</button>       
+          <button class="btn-order" @click="openPopup(item._id)" v-if="createMenuId !== item._id">เพิ่มรายการ</button>       
 
       <!-- POPUP MENU -->
         <div v-else >
@@ -24,17 +24,11 @@
           <p>บิลที่ 1 | ผู้สร้างรายการ Joe</p>
           <hr>
           <div>
-            <div class="options">
-              <h5>น้ำแข็ง</h5>
+            <h5>น้ำแข็ง</h5>
+            <div class="options" v-for="item in ices" :key="item.id" >              
               <label>
-                <input type="radio" v-model="iceoptions" value="ปั่น" /> ปั่น
-              </label>
-              <label>
-                <input type="radio" v-model="iceoptions" value="ไม่ปั่น"/> ไม่ปั่น
-              </label>
-              <label>
-                <input type="radio" v-model="iceoptions" value=""/> ไม่เลือก
-              </label>
+                <input type="radio" v-model="selectedIce" name="ice" :value="item.id" />{{ item.name }} 
+              </label>             
             </div>
             <hr>
             <div class="options">
@@ -73,14 +67,14 @@
             </div>
             <hr>
           </div>
-          <button type="button" @click="openPopup()">เปิดรายการ</button>
+          <button type="button" @click="addToBill()">เปิดรายการ</button>
           <button type="button" style="background-color: yellowgreen;" @click="Savesilp">บันทึกรูปใบเสร็จ</button>
           <button type="button" style="background-color: red;" @click="openPopup()">ยกเลิกรายการ</button>                      
         </div>   
       <!-- ------------------------------------------------ -->
-      
+    </div> 
       <!-- POPUP-BILL MENU -->
-        <div v-if="isPopupVisible" class="popup-bill" :style="{ visibility: isPopupVisible ? 'visible' : 'hidden' }">
+        <div  class="popup-bill">
           <div class="ppbill">
             <div class="head-bill" style="text-align: center">
               <h2>ร้าน ลิงปีนมะพร้าว</h2>
@@ -94,7 +88,7 @@
             </div>
             <div style="text-align: right">{{ item.menuprice }}</div>
             <div>
-              <p>น้ำแข็ง: {{ iceoptions }}</p>
+              <p>น้ำแข็ง: {{ selectedIce }}</p>
               <div style="text-align: right">{{ checkIce }}</div> <!-- ราคา -->
               <p>ระดับความหวาน: {{ sweetoptions }}</p>
               <div style="text-align: right">0</div> <!-- ราคา -->
@@ -115,7 +109,7 @@
           </div>         
         </div>
       <!-- ------------------------------------------------ -->
-      </div>
+      
     </div>
   </div>
 </div>
@@ -133,7 +127,18 @@ export default {
       sweetoptions: "",
       toppingoptions: "",      
       menulist: [],
-      createMenuId: null,     
+      createMenuId: null,    
+      billItem: [],
+      selectedMenu: null,
+      selectedIce: null,
+      selectedSweet: null,
+      selectedTopping: null,
+      ices: [
+        { id: 1, name: 'ปั่น'},
+        { id: 2, name: 'ไม่ปั่น'},
+        { id: 3, name: 'ไม่เลือก'}
+      ]
+
     };
   },
   mounted() {
@@ -158,6 +163,20 @@ export default {
           console.log("เกิดข้อผิดพลาดในการเรียก API:", err);
         });
     },
+    addToBill() {
+      const selectedmenus = this.menulist.find(menuitem => menuitem._id === this.selectedMenu)
+      const ice = this.ice.filter(option => this.selectedIce.includes(option._id))
+
+      const billItem = {
+          id: Date.now(), // สร้าง id จาก timestamp ของปัจจุบัน
+          selectedmenus,
+          ice
+      };
+
+      this.billItems.push(billItem);    
+        this.selectedMenu = null;
+        this.selectedIce = null;
+    }
   },
   computed: {
     checkToppingPrice() {
@@ -166,9 +185,6 @@ export default {
       } else {
         return 0;
       }
-    },
-    sumPrice(checkMenuPrice, checkToppingPrice, checkIce) {
-      return this.checkMenuPrice + this.checkToppingPrice + this.checkIce;
     },
     checkIce() {
       if (this.iceoptions === "ปั่น") {
@@ -220,20 +236,23 @@ export default {
 }
 
 .popup-bill {
-  width: 400px;
+  /* width: 400px; */
+  width: 20%;
   height: 690px;
   background: #fff;
   border-radius: 6px;
   position: absolute;
   top: 50%;
-  left: 70%;
+  left: 88%;
   transform: translate(-50%, -50%);
   text-align: center;
   padding: 0 30px 30px;
   color: #000000;
-  visibility: hidden;
+  visibility: visible;
   z-index: 1;
   padding: 30px 10px 20px 10px;
+  display: grid;
+  
   
 }
 .popup-bill span {
@@ -272,7 +291,7 @@ export default {
 }
 
 .btn-order {
-  width: 40%;
+  width: 60%;
   margin: 2px;
   padding: 10px 0;
   background: orangered;
@@ -305,6 +324,7 @@ export default {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-gap: 25px;
+  width: 70%;
 }
 
 

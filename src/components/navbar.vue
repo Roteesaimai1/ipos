@@ -54,6 +54,14 @@
           <span class="rlink" style="margin-left: -1%;" > <strong>จัดการพนักงาน</strong> </span>
         </div>
       </router-link>
+      <router-link style="text-decoration: none;" to="/devpage">
+        <div class="navlink">
+          <div style="margin-right: 10%; margin-left: 10%;">
+            <i class="fa-solid fa-user-pen fa-xl" style="color: orangered;"></i>
+          </div>         
+          <span class="rlink" style="margin-left: -1%;" > <strong>Developer</strong> </span>
+        </div>
+      </router-link>
       <router-link style="text-decoration: none;" to="/page3">
         <div class="navlink-logout">
           <div style="margin-right: 10%; margin-left: 10%;">
