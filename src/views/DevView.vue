@@ -27,42 +27,34 @@
               <h5>น้ำแข็ง</h5>
               <div class="options" v-for="item in ices" :key="item.id" >              
                 <label>
-                  <input type="radio" v-model="selectedIce" name="ice" :value="item.id" />{{ item.name }} 
+                  <input type="radio" v-model="selectedIce" name="ice" :value="{name:item.name, price:item.price}" />{{ item.name }} 
                 </label>             
               </div>
               <hr>
-              <div class="options">
-                <h5>ระดับความหวาน</h5>
+             
+              <h5>ระดับความหวาน</h5>
+               <div class="options" v-for="itemsw in sweets" :key="itemsw.id" >  
                 <label>
-                  <input type="radio" v-model="sweetoptions" value="ปกติ" /> ปกติ
-                </label>
-                <label>
-                  <input type="radio" v-model="sweetoptions" value="หวานน้อย" /> หวานน้อย
-                </label>
-                <label>
-                  <input type="radio" v-model="sweetoptions" value="เพิ่มหวาน" /> เพิ่มหวาน
-                </label>
-                <label>
-                  <input type="radio" v-model="sweetoptions" value="" /> ไม่เลือก
-                </label>
+                  <input type="radio" name="sugar" v-model="selectedSweet" :value="{name:itemsw.name, price:itemsw.price}" /> {{ itemsw.name }}
+                </label>               
               </div>
               <hr>
               <div class="options">
                 <h5>ท็อปปิ้ง (เพิ่ม 10 บาท)</h5>
                 <label>
-                  <input type="radio" v-model="toppingoptions" value="คาราเมล" /> คาราเมล
+                  <input type="radio"  value="คาราเมล" /> คาราเมล
                 </label>
                 <label>
-                  <input type="radio" v-model="toppingoptions" value="ช็อกโกแล็ต" /> ช็อกโกแล็ต
+                  <input type="radio"  value="ช็อกโกแล็ต" /> ช็อกโกแล็ต
                 </label>
                 <label>
-                  <input type="radio" v-model="toppingoptions" value="สตรอเบอร์รี่"/> สตรอเบอร์รี่
+                  <input type="radio"  value="สตรอเบอร์รี่"/> สตรอเบอร์รี่
                 </label>
                 <label>
-                  <input type="radio" v-model="toppingoptions" value="เนื้อมะพร้าวอ่อน"/> เนื้อมะพร้าวอ่อน
+                  <input type="radio"  value="เนื้อมะพร้าวอ่อน"/> เนื้อมะพร้าวอ่อน
                 </label>
                 <label>
-                  <input type="radio" v-model="toppingoptions" value="" /> ไม่เลือก
+                  <input type="radio"  value="" /> ไม่เลือก
                 </label>
               </div>
               <hr>
@@ -76,30 +68,34 @@
         <!-- POPUP-BILL MENU -->
           <div v-if="billItems.length > 0" class="popup-bill" >
             <div class="ppbill">
-              <div class="head-bill" style="text-align: center">
-                <h2>ร้าน ลิงปีนมะพร้าว</h2>
+              <div class="head-bill" style="text-align: center" >
+                <h5>ร้าน ลิงปีนมะพร้าว</h5>
                 <b>สาขา ตลาดใหญ่มาก มาร์เก็ต</b>
-                <p>บิลที่ 1 ผู้สร้างรายการ Joe</p>
+                <p>บิลที่ 14 ผู้สร้างรายการ Joe</p>
               </div>
               <hr />
               <div v-for="item in billItems" :key="item.id" >
-                <p><b>เมนู {{ item.menu.menuname }}</b></p>
-                <!-- ชื่อรายการ -->
-              </div>
-              <div style="text-align: right"></div>
-              <div >
-                <p>น้ำแข็ง: </p>
-                <div style="text-align: right"></div> <!-- ราคา -->
-                
-                <!-- price-topping -->
-              </div>
+                <p><b>เมนู: {{ item.menu.menuname }}</b> ราคา {{ item.menu.menuprice }} </p>
+                <ul>
+                  <li style="display: flex; justify-content: space-between; text-align: left;" >
+                    <span>น้ำแข็ง: {{ item.ice.name }} </span>                       
+                    <span style="text-align: right;" > ราคา {{ item.ice.price }} บาท</span>                       
+                  </li>                                                                                       
+                </ul>  
+                <ul>
+                    <li style="display: flex; justify-content: space-between; text-align: left;"  >
+                        <span>ความหวาน: {{ item.sweet.name }} </span>  
+                        <span style="text-align: right;"  >ราคา {{ item.sweet.price }} บาท </span>                       
+                    </li>
+                </ul>             
+              </div>              
               <div class="footer-bill">
                 <hr />
                 <div class="total">
-                  <h4>Total :</h4>
+                  <h6>Total :</h6>
                 </div>
-                <div class="total-price" style="text-align: right; font-size: 23px">
-                  <b> บาท</b>
+                <div class="total-price" style="text-align: right; font-size: 18px">
+                  <b> {{ calculateTotalPrice() }} บาท</b>
                 </div>
                 <div style="text-align: center">Thank you</div>
               </div>
@@ -119,10 +115,7 @@
     data() {
       return {
         isPopupVisible: false,
-        maincontent: false,
-        iceoptions: "",
-        sweetoptions: "",
-        toppingoptions: "",      
+        maincontent: false,           
         menulist: [],
         createMenuId: null,    
         billItems: [],
@@ -131,9 +124,14 @@
         selectedSweet: null,
         selectedTopping: null,
         ices: [
-          { id: 1, name: 'ปั่น'},
-          { id: 2, name: 'ไม่ปั่น'},
-          { id: 3, name: 'ไม่เลือก'}
+          { id: 1, name: 'ปั่น' , price: 5},
+          { id: 2, name: 'ไม่ปั่น', price: 0},
+          { id: 3, name: 'ไม่เลือก', price: 0}
+        ],
+        sweets: [
+          { id: 1, name: 'ปกติ' , price: 0},
+          { id: 2, name: 'หวานน้อย', price: 0},
+          { id: 3, name: 'เพิ่มหวาน', price: 0}
         ]
   
       };
@@ -147,6 +145,7 @@
         this.maincontent = !this.maincontent;
         this.createMenuId = menuId
         this.selectedMenu = this.menulist.find((item) => item._id === menuId);
+        
       },
       Savesilp() {
         alert("บันทึกเรียบร้อยแล้ว");
@@ -165,6 +164,9 @@
         const billItem = {
         id: Date.now(),
         menu: this.selectedMenu,
+        ice: this.selectedIce,
+        sweet: this.selectedSweet,
+        
         // เพิ่มรายละเอียดอื่น ๆ ของรายการในบิล
         };
         this.billItems.push(billItem);
@@ -172,7 +174,17 @@
         this.maincontent = false;
         this.createMenuId = null;
         this.selectedMenu = null;
-        },
+        this.selectedIce = null;
+        this.selectedSweet = null;
+      },
+      calculateTotalPrice() {
+        let total = 0;
+        for (const item of this.billItems) {
+          total += item.menu.menuprice + item.ice.price + item.sweet.price;
+        }
+        return total;
+      }
+
     },    
     computed: {
       
@@ -202,6 +214,13 @@
     text-align: left;
     padding: 30px;
   }
+  .ppbill ul{
+    list-style-type: none;
+    margin: 0px;   
+  }
+ .ppbill li{ 
+    margin: -12px;   
+  } 
   
   .popup {
     width: 400px;
@@ -222,7 +241,7 @@
   .popup-bill {
     /* width: 400px; */
     width: 20%;
-    height: 690px;
+    height: 790px;
     background: #fff;
     border-radius: 6px;
     position: absolute;
@@ -236,6 +255,7 @@
     z-index: 1;
     padding: 30px 10px 20px 10px;
     display: grid;
+    font-size: 13px;
     
     
   }
