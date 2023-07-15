@@ -21,13 +21,13 @@
               <img src="../assets/billpic.png" width="120" height="120" />
             </div>
             <h3>{{ selectedMenu.menuname }} {{ selectedMenu.menuprice }}</h3>       
-            <p>บิลที่ 1 | ผู้สร้างรายการ Joe</p>
+            <p>บิลที่ 14 | ผู้สร้างรายการ Joe</p>
             <hr>
             <div>
               <h5>น้ำแข็ง</h5>
               <div class="options" v-for="item in ices" :key="item.id" >              
                 <label>
-                  <input type="radio" v-model="selectedIce" name="ice" :value="{name:item.name, price:item.price}" />{{ item.name }} 
+                  <input type="radio" v-model="selectedIce" name="ice" :value="{name:item.name, price:item.price}" /> {{ item.name }} 
                 </label>             
               </div>
               <hr>
@@ -39,23 +39,11 @@
                 </label>               
               </div>
               <hr>
-              <div class="options">
-                <h5>ท็อปปิ้ง (เพิ่ม 10 บาท)</h5>
+              <h5>ท็อปปิ้ง</h5>
+              <div class="options" v-for="topitem in toppings" :key="topitem.id" >               
                 <label>
-                  <input type="radio"  value="คาราเมล" /> คาราเมล
-                </label>
-                <label>
-                  <input type="radio"  value="ช็อกโกแล็ต" /> ช็อกโกแล็ต
-                </label>
-                <label>
-                  <input type="radio"  value="สตรอเบอร์รี่"/> สตรอเบอร์รี่
-                </label>
-                <label>
-                  <input type="radio"  value="เนื้อมะพร้าวอ่อน"/> เนื้อมะพร้าวอ่อน
-                </label>
-                <label>
-                  <input type="radio"  value="" /> ไม่เลือก
-                </label>
+                  <input type="radio" name="topping" v-model="selectedTopping" :value="{ name:topitem.name, price:topitem.price }" /> {{ topitem.name }}
+                </label>               
               </div>
               <hr>
             </div>
@@ -87,7 +75,13 @@
                         <span>ความหวาน: {{ item.sweet.name }} </span>  
                         <span style="text-align: right;"  >ราคา {{ item.sweet.price }} บาท </span>                       
                     </li>
-                </ul>             
+                </ul>  
+                <ul>
+                    <li style="display: flex; justify-content: space-between; text-align: left;"  >
+                        <span>ท็อปปิ้ง: {{ item.topping.name }} </span>  
+                        <span style="text-align: right;"  >ราคา {{ item.topping.price }} บาท </span>                       
+                    </li>
+                </ul>           
               </div>              
               <div class="footer-bill">
                 <hr />
@@ -98,6 +92,11 @@
                   <b> {{ calculateTotalPrice() }} บาท</b>
                 </div>
                 <div style="text-align: center">Thank you</div>
+                <div style="display: inline; " >
+                  <button style="width: 50%; margin: 10px; background: orangered; border: none; border-radius: 2px; color: #fff;" >ยืนยัน</button>
+                  <button style="width: 30%; margin: 10px; background: orangered; border: none; border-radius: 2px; color: #fff;" @click="CCbtn()" >ยกเลิก</button>
+                </div>
+                
               </div>
             </div>         
           </div>
@@ -131,7 +130,16 @@
         sweets: [
           { id: 1, name: 'ปกติ' , price: 0},
           { id: 2, name: 'หวานน้อย', price: 0},
-          { id: 3, name: 'เพิ่มหวาน', price: 0}
+          { id: 3, name: 'เพิ่มหวาน', price: 0},
+          { id: 4, name: 'ไม่เลือก', price: 0}
+        ],
+        toppings: [
+          { id: 1, name: 'คาราเมล' , price: 10},
+          { id: 2, name: 'นมข้นหวาน', price: 5},
+          { id: 3, name: 'เนื้อมะพร้าว', price: 10},
+          { id: 4, name: 'สตอเบอรรี่', price: 10},
+          { id: 5, name: 'ช็อกโกแล็ต', price: 10},
+          { id: 6, name: 'ไม่เลือก', price: 0}
         ]
   
       };
@@ -166,6 +174,7 @@
         menu: this.selectedMenu,
         ice: this.selectedIce,
         sweet: this.selectedSweet,
+        topping: this.selectedTopping
         
         // เพิ่มรายละเอียดอื่น ๆ ของรายการในบิล
         };
@@ -176,13 +185,19 @@
         this.selectedMenu = null;
         this.selectedIce = null;
         this.selectedSweet = null;
+        this.selectedTopping = null;
       },
       calculateTotalPrice() {
         let total = 0;
         for (const item of this.billItems) {
-          total += item.menu.menuprice + item.ice.price + item.sweet.price;
+          total += item.menu.menuprice + item.ice.price + item.sweet.price + item.topping.price;
         }
         return total;
+      },
+      CCbtn() {
+        if (confirm('ต้องการเคลียบิลใช่ไหม?')) {
+          window.location.reload()
+        }       
       }
 
     },    
@@ -196,6 +211,7 @@
   <style>
   .options label {
     padding: 10px;
+    display: inline;
   }
   
   .maincontentclose {
@@ -235,6 +251,7 @@
     color: #000000;
     visibility: hidden;
     z-index: 1;
+    font-size: 15px;
     
   }
   
