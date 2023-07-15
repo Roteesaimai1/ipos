@@ -1,8 +1,8 @@
 <template>
   <div class="grid-container">
-    <div class="header" style="text-align: right;" >       
-      <span style="text-align: right;" ><strong>หน้า : {{ currentPage }}</strong> </span>  
-               
+    <div class="header" style="display: flex; justify-content: space-between; text-align: left;" >       
+      <span><strong>ยอดขายล่าสุด : 1800</strong> </span>  
+      <span style="text-align: right; font-size: 20px; " ><strong>หน้า : {{ currentPage }}</strong> </span>          
     </div>
     <div class="sidebar"> <navbar/> </div>
     <div class="content"> <router-view></router-view> </div> 

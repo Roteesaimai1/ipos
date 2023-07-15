@@ -8,30 +8,30 @@
         </div>
         <hr>
         <div class="card1-content">
-          <p style="text-align: center; margin: 5%;" ><b>{{ selling }} บาท</b></p>
-          <p style="text-align: left; margin: 5%;" >รายการขาย 42 รายการ</p>
+          <p style="text-align: center; margin: 5%;" ><b>{{ income }} บาท</b></p>
+          <p style="text-align: left; margin: 5%;" >ดูรายละเอียดเพิ่มเติม</p>
         </div>
       </div>
       <!-- card 2  -->
       <div class="card2">
         <div class="card2-head">
-          <h4 style="text-align: center; margin: 2%;" ><strong>🛒ต้นทุน</strong></h4>
+          <h4 style="text-align: center; margin: 2%;" ><strong>🛒จำนวนที่ขาย</strong></h4>
           <hr>
         </div>
         <div class="card2-content">
-          <p style="text-align: center; margin: 5%;" ><b>{{ margin }} บาท</b></p>
-          <p style="text-align: left; margin: 5%;" >รายการจ่าย 4 รายการ</p>
+          <p style="text-align: center; margin: 5%;" ><b>{{ amount }} ชิ้น</b></p>
+          <p style="text-align: left; margin: 5%;" >ดูรายละเอียดเพิ่มเติม</p>
         </div>
       </div>
       <!-- Card 3 -->
       <div class="card3">
         <div class="card3-head">
-          <h4 style="text-align: center; margin: 2%;" ><strong>🪙กำไร</strong></h4>
+          <h4 style="text-align: center; margin: 2%;" ><strong>🪙ส่วนลด</strong></h4>
           <hr>
         </div>
         <div class="card3-content">
-          <p style="text-align: center; margin: 5%;" ><b>{{profit}} บาท</b></p>
-          <p style="text-align: left; margin: 5%;" >อัตรากำไร 44.44%</p>
+          <p style="text-align: center; margin: 5%;" ><b>{{discount}} บาท</b></p>
+          <p style="text-align: left; margin: 5%;" >ดูรายละเอียดเพิ่มเติม</p>
         </div>
       </div>
       <!-- Card 4 -->
@@ -41,7 +41,7 @@
           <hr>
         </div>
         <div class="card4-content">
-          <p style="text-align: center; margin: 5%;" ><b>{{ totalmargin }} บาท</b></p>
+          <p style="text-align: center; margin: 5%;" ><b>{{ totalincome }} บาท</b></p>
           <p style="text-align: left; margin: 5%;" >รายการขาย 387 รายการ</p>
         </div>
       </div>
@@ -106,10 +106,10 @@ export default {
   data(){
     return {
       logupdate: [],
-      selling: 1800,
-      margin: 800,
-      profit: 1000,
-      totalmargin: 15500,
+      income: 1800,
+      amount: 58,
+      discount: 20,
+      totalincome: 15500,
       textlog: {
         id: 1,
         text: '15.32 Joe: ขายมะพร้าวปั่นนมสด 1 ราย  ',
