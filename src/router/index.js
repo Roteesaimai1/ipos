@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import OrderView from '../views/OrderView.vue'
-import Page3 from '../views/Page3.vue'
+import BillView from '../views/BillView.vue'
 import MenuView from '../views/MenuView.vue'
 import UserView from '../views/UserView.vue'
 import DevView from '../views/DevView.vue'
@@ -20,9 +20,9 @@ const router = createRouter({
       component: OrderView
     },
     {
-      path: '/page3',
-      name: 'page3',
-      component: Page3
+      path: '/Bill',
+      name: 'Bill',
+      component: BillView
     },
     {
       path: '/menuedit',

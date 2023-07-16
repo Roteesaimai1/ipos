@@ -91,9 +91,9 @@
               <div class="total-price" style="text-align: right; font-size: 18px">
                 <b> {{ calculateTotalPrice() }} บาท</b>
               </div>
-              <div style="text-align: center">Thank you</div>
+              <div style="text-align: center"></div>
               <div style="display: inline; " >
-                <button style="width: 50%; margin: 10px; background: orangered; border: none; border-radius: 2px; color: #fff;" >ยืนยัน</button>
+                <button style="width: 50%; margin: 10px; background: orangered; border: none; border-radius: 2px; color: #fff;"  >ยืนยัน</button>
                 <button style="width: 30%; margin: 10px; background: orangered; border: none; border-radius: 2px; color: #fff;" @click="CCbtn()" >ยกเลิก</button>
               </div>
               
@@ -174,10 +174,9 @@ export default {
       menu: this.selectedMenu,
       ice: this.selectedIce,
       sweet: this.selectedSweet,
-      topping: this.selectedTopping
-      
-      // เพิ่มรายละเอียดอื่น ๆ ของรายการในบิล
+      topping: this.selectedTopping            
       };
+     
       this.billItems.push(billItem);
       this.isPopupVisible = false;
       this.maincontent = false;
@@ -198,7 +197,8 @@ export default {
       if (confirm('ต้องการเคลียบิลใช่ไหม?')) {
         window.location.reload()
       }       
-    }
+    },
+    
 
   },    
   computed: {

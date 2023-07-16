@@ -28,7 +28,7 @@
           <span class="rlink" style="margin-left: 5%;"><strong>จัดการออเดอร์</strong> </span>
         </div>
       </router-link>
-      <router-link style="text-decoration: none;" to="/page3">
+      <router-link style="text-decoration: none;" to="/bill">
         <div class="navlink">
           <div style="margin-right: 10%; margin-left: 10%;">
             <i class="fa-solid fa-receipt fa-xl" style="color: orangered;"></i>
@@ -54,15 +54,15 @@
           <span class="rlink" style="margin-left: -1%;" > <strong>จัดการพนักงาน</strong> </span>
         </div>
       </router-link>
-      <router-link style="text-decoration: none;" to="/devpage">
+      <router-link style="text-decoration: none;" to="#">
         <div class="navlink">
           <div style="margin-right: 10%; margin-left: 10%;">
-            <i class="fa-solid fa-user-pen fa-xl" style="color: orangered;"></i>
+            <i class="fa-solid fa-gear fa-xl" style="color: orangered;"></i>
           </div>         
-          <span class="rlink" style="margin-left: -1%;" > <strong>Developer</strong> </span>
+          <span class="rlink" style="margin-left: -1%;" > <strong>ตั้งค่าระบบ</strong> </span>
         </div>
       </router-link>
-      <router-link style="text-decoration: none;" to="/page3">
+      <router-link style="text-decoration: none;" to="#">
         <div class="navlink-logout">
           <div style="margin-right: 10%; margin-left: 10%;">
             <i class="fa-solid fa-right-from-bracket fa-xl" style="color: rgb(255, 2, 2)"></i>

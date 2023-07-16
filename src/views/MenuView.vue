@@ -232,7 +232,7 @@ computed: {
   margin-top: 5%;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  grid-gap: 30px;
+  grid-gap: 25px;
 }
 .menulist {
   background-color: #fff;
